@@ -7,7 +7,6 @@
 """
 from cl.base_cl import BaseCL
 
-
 class ClPV(BaseCL):
     """PV源模拟器原子操作层
 
