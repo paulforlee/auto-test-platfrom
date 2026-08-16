@@ -1,0 +1,75 @@
+# 环境配置（设备IP/型号/端口等）
+# 每个环境一个键，环境名与 .env 的 TEST_ENV / run_tests.py 的 --env 对应
+# TODO: 按实际产线环境填充设备 IP 与端口
+
+environments:
+  # 默认环境（示例占位值）
+  default:
+    ac_source:
+      model: PRE2020S
+      connection:
+        type: scpi            # scpi / modbus / visa / tcp
+        host: 192.168.1.10
+        port: 5025
+        timeout: 5.0
+    ac_source_2:
+      model: IT6000C
+      connection:
+        type: scpi
+        host: 192.168.1.11
+        port: 5025
+        timeout: 5.0
+    pv_simulator:
+      model: PV_SIMULATOR
+      connection:
+        type: scpi
+        host: 192.168.1.12
+        port: 5025
+        timeout: 5.0
+    power_meter:
+      model: POWER_METER
+      connection:
+        type: modbus
+        host: 192.168.1.13
+        port: 502
+        unit: 1
+        timeout: 5.0
+    inverter:
+      model: INVERTER
+      connection:
+        type: tcp              # 逆变器私有 TCP 协议
+        host: 192.168.1.14
+        port: 8899
+        timeout: 5.0
+
+  # 生产 3 线（TODO: 按产线实际参数填充）
+  Production_Line_3:
+    ac_source:
+      model: PRE2020S
+      connection:
+        type: scpi
+        host: TODO_AC_IP
+        port: 5025
+        timeout: 5.0
+    pv_simulator:
+      model: PV_SIMULATOR
+      connection:
+        type: scpi
+        host: TODO_PV_IP
+        port: 5025
+        timeout: 5.0
+    power_meter:
+      model: POWER_METER
+      connection:
+        type: modbus
+        host: TODO_METER_IP
+        port: 502
+        unit: 1
+        timeout: 5.0
+    inverter:
+      model: INVERTER
+      connection:
+        type: tcp
+        host: TODO_INVERTER_IP
+        port: 8899
+        timeout: 5.0

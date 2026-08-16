@@ -1,0 +1,57 @@
+{
+  "device": "POWER_METER",
+  "description": "功分仪命令映射（ModbusTCP）",
+  "protocol": "ModbusTCP",
+  "_note": "TODO: 以下寄存器地址与量纲为示例占位，需按功分仪寄存器表逐条核对",
+  "byte_order": ">",
+  "commands": {
+    "read_voltage": {
+      "function": "read_holding_registers",
+      "address": 0,
+      "count": 2,
+      "data_type": "float32",
+      "scale": 1.0,
+      "unit": "V"
+    },
+    "read_current": {
+      "function": "read_holding_registers",
+      "address": 2,
+      "count": 2,
+      "data_type": "float32",
+      "scale": 1.0,
+      "unit": "A"
+    },
+    "read_power": {
+      "function": "read_holding_registers",
+      "address": 4,
+      "count": 2,
+      "data_type": "float32",
+      "scale": 1.0,
+      "unit": "W"
+    },
+    "read_frequency": {
+      "function": "read_holding_registers",
+      "address": 6,
+      "count": 1,
+      "data_type": "uint16",
+      "scale": 0.01,
+      "unit": "Hz"
+    },
+    "read_power_factor": {
+      "function": "read_holding_registers",
+      "address": 7,
+      "count": 1,
+      "data_type": "uint16",
+      "scale": 0.001,
+      "unit": ""
+    },
+    "read_energy": {
+      "function": "read_holding_registers",
+      "address": 8,
+      "count": 2,
+      "data_type": "uint32",
+      "scale": 0.001,
+      "unit": "kWh"
+    }
+  }
+}

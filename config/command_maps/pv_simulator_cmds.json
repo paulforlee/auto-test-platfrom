@@ -1,0 +1,30 @@
+{
+  "device": "PV_SIMULATOR",
+  "description": "PV源模拟器命令映射（SCPI）",
+  "protocol": "SCPI",
+  "terminator": "\n",
+  "_note": "TODO: 以下命令为示例占位，需按 PV 模拟器编程手册逐条核对",
+  "commands": {
+    "identify": "*IDN?",
+    "reset": "*RST",
+    "set_voltage": "SOUR:VOLT {value}",
+    "set_current": "SOUR:CURR {value}",
+    "set_iv_curve_point": "SOUR:TABL:POINT {index},{voltage},{current}",
+    "load_iv_curve": "SOUR:TABL:LOAD",
+    "set_mppt_mode": "SOUR:MPPT {mode}",
+    "output_on": "OUTP ON",
+    "output_off": "OUTP OFF",
+    "measure_voltage": "MEAS:VOLT?",
+    "measure_current": "MEAS:CURR?",
+    "measure_power": "MEAS:POW?"
+  },
+  "value_formats": {
+    "voltage": "{:.3f}",
+    "current": "{:.3f}"
+  },
+  "response_parsers": {
+    "measure_voltage": {"type": "float", "unit": "V"},
+    "measure_current": {"type": "float", "unit": "A"},
+    "measure_power": {"type": "float", "unit": "W"}
+  }
+}

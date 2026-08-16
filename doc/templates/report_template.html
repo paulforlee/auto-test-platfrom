@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  <style>
+    /* TODO: 按公司报告样式规范美化 */
+    body { font-family: "Microsoft YaHei", sans-serif; margin: 2em; color: #333; }
+    h1 { border-bottom: 2px solid #2c7be5; padding-bottom: .3em; }
+    table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+    th, td { border: 1px solid #ccc; padding: .4em .8em; text-align: center; }
+    th { background: #eef4fd; }
+    .pass { color: #1a7f37; font-weight: bold; }
+    .fail { color: #d1242f; font-weight: bold; }
+    .meta { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>{{ title }}</h1>
+  <p class="meta">测试环境: {{ env }} ｜ 生成时间: {{ timestamp }} ｜ 结论:
+    <span class="{{ 'pass' if all_passed else 'fail' }}">
+      {{ 'PASS' if all_passed else 'FAIL' }}</span>
+  </p>
+
+  <h2>比较明细</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>参数</th><th>期望值</th><th>实测值</th><th>容差</th><th>偏差</th><th>结果</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.expected }}{{ item.unit }}</td>
+        <td>{{ item.actual }}{{ item.unit }}</td>
+        <td>{{ (item.tolerance * 100) | round(1) }}%</td>
+        <td>{{ (item.deviation * 100) | round(2) }}%</td>
+        <td class="{{ 'pass' if item.passed else 'fail' }}">
+          {{ 'PASS' if item.passed else 'FAIL' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {# TODO: 曲线图占位（IV 曲线 / 效率曲线，由 Compara.py 注入图表数据） #}
+  <h2>曲线</h2>
+  <div id="charts">{% for chart in charts %}{{ chart }}{% endfor %}</div>
+
+  <footer class="meta">由 pv-test-platform 自动生成</footer>
+</body>
+</html>

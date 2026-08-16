@@ -1,0 +1,25 @@
+# 全局配置（日志级别、报告路径等）
+
+logging:
+  level: INFO            # DEBUG / INFO / WARNING / ERROR
+  console: true          # 是否输出到控制台
+  # TODO: 接入 utils/logger.py，按此配置初始化
+
+paths:
+  report_html: doc/reports/html
+  report_pdf: doc/reports/pdf
+  raw_data: testcase/data/raw
+  templates: doc/templates
+
+device:
+  default_timeout: 5.0   # 连接默认超时（秒）
+  retry_times: 3         # 通信重试次数
+  retry_interval: 1.0    # 重试间隔（秒）
+
+# Compara.py 数据比较容差（相对值，如 0.05 表示 ±5%）
+comparison:
+  tolerance_voltage: 0.05
+  tolerance_current: 0.05
+  tolerance_power: 0.02
+  tolerance_frequency: 0.01
+  tolerance_efficiency: 0.02

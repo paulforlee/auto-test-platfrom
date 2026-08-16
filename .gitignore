@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# 虚拟环境
+venv/
+.venv/
+
+# 环境变量（不提交到 Git）
+.env
+
+# 日志
+logs/*.log
+
+# 生成产物（报告 / 原始数据 / 导出文件）
+doc/reports/html/
+doc/reports/pdf/
+testcase/data/raw/
+*.xlsx
+*.csv
+
+# IDE
+.vscode/
+.idea/
