@@ -23,9 +23,12 @@ auto-test-platform/
 ├── cl/                                 # 原子业务层（Common Layer）
 ├── pbl/                                # 复合业务层（Public Business Layer）
 ├── pml/                                # 数据记录层（Public Measure Layer）
-├── Common/                             # 公共流程层（Public Process Layer）
-│   └── ppl/
-│       └── ppl_schedule.py             # 跨设备组合的通用测试流程调度
+├── Common/                             # 公共包
+│   ├── ppl/                            # 公共流程层（Public Process Layer）
+│   │   └── ppl_schedule.py             # 跨设备组合的通用测试流程调度
+│   └── iot/                            # 云平台交互
+│       ├── interface.yml               # 接口 url 与请求方法定义
+│       └── iot_request.py              # 基于 requests 的接口请求封装
 ├── testcase/                           # 测试用例目录
 │   ├── conftest.py                     # 用例夹具（连接→驱动→CL→PBL→PPL 装配）
 │   └── 逆变器/                         # 按测试场景分类
@@ -52,6 +55,7 @@ auto-test-platform/
 | `pbl` | 复合业务 | 测试序列编排（缓启动、电源循环、IV 扫描、MPPT、效率测试） |
 | `pml` | 数据记录 | 实时记录 → 统计分析 → 导出 Excel/CSV |
 | `Common/ppl` | 公共流程 | 跨设备组合的通用流程调度（电网过欠压/过欠频保护、波形记录、保护时间、高低穿、最大无功运行） |
+| `Common/iot` | 云平台交互 | 接口 url/方法统一定义在 interface.yml，iot_request.py 基于 requests 封装（升级版本/日志导出/发电数据统计） |
 | `testcase` | 测试用例 | pytest 用例脚本，按场景分类，通过夹具自动装配 PPL/PBL/CL 实例 |
 | `Compara.py` | 结果比对 | 实测数据 vs 期望数据，生成 HTML 报告 |
 

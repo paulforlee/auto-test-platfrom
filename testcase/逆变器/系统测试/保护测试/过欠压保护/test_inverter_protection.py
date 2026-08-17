@@ -2,7 +2,7 @@
 import pytest
 
 pytestmark = pytest.mark.inverter
-
+from Common.ppl.ppl_schedule import PplSchedule as PPL
 
 def test_protection_actions(ppl_schedule, test_params, recorder):
     """保护动作验证：过压/欠压/过流等异常工况下逆变器应触发对应保护
@@ -15,6 +15,9 @@ def test_protection_actions(ppl_schedule, test_params, recorder):
     3. 校验: 保护触发 / 反应时间 ≤ 指标 / 故障码与预期一致
     4. 每项结束后恢复工况，确认逆变器可恢复正常
     """
+
+    PPL.start_waveform_recording()
+    PPL.save_waveform()
     raise NotImplementedError("TODO: 实现逆变器保护测试用例")
 
 

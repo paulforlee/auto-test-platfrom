@@ -1,0 +1,35 @@
+# 云平台接口定义（接口 url 与请求方法统一在此维护）
+#
+# 云平台地址暂定为 iot.com，正式地址确定后仅需修改 base_url
+# （或设置 .env 的 CLOUD_API_URL 覆盖本文件）。
+# TODO: 以下 path 均为占位，需按云平台实际接口文档核对修正。
+
+base_url: https://iot.com
+
+# 请求超时（秒），接口可单独覆盖
+timeout: 10.0
+
+interfaces:
+  upgrade_version:              # 升级版本查询
+    method: GET
+    path: /api/v1/upgrade/version
+    description: 查询设备可升级版本信息
+    # TODO: 确认请求参数（如 device_sn）与响应结构
+
+  log_export:                   # 日志导出
+    method: POST
+    path: /api/v1/logs/export
+    description: 导出设备日志（返回日志文件内容）
+    # TODO: 确认请求参数（设备、时间范围）与响应格式（二进制文件 / JSON 下载地址）
+
+  pv_data_stats:                # 光伏发电数据统计
+    method: GET
+    path: /api/v1/pv/stats
+    description: 光伏发电数据统计（发电量/功率/收益等）
+    # TODO: 确认请求参数（设备、统计周期）与响应结构
+
+  # TODO: 按云平台实际接口清单继续补充，例如：
+  #   - remote_upgrade: 远程升级下发
+  #   - device_bind:     设备绑定/解绑
+  #   - alarm_report:    告警上报
+  #   - realtime_data:   实时运行数据查询

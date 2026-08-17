@@ -34,3 +34,8 @@ class MeasurementError(TestPlatformError):
 class EmergencyStopError(TestPlatformError):
     """紧急停止执行失败（用于急停脚本）"""
     pass
+
+
+class CloudApiError(TestPlatformError):
+    """云平台接口错误：地址未配置 / 接口未定义 / HTTP 非 2xx / 网络异常 / 响应解析失败"""
+    pass
