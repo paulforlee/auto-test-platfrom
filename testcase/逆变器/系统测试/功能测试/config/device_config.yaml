@@ -1,0 +1,30 @@
+# 设备连接参数（用于平台展示与测试执行）
+# TODO: 按产线实际环境填充；也可由 config/config_manager.py 从 Web 平台拉取覆盖
+ac_source:
+  model: PRE2020S
+  host: 192.168.1.10
+  port: 5025
+  connection_type: scpi
+  timeout: 5.0
+
+pv_simulator:
+  model: PV_SIMULATOR
+  host: 192.168.1.12
+  port: 5025
+  connection_type: scpi
+  timeout: 5.0
+
+power_meter:
+  model: POWER_METER
+  host: 192.168.1.13
+  port: 502
+  connection_type: modbus
+  unit: 1
+  timeout: 5.0
+
+inverter:
+  model: INVERTER
+  host: 192.168.1.14
+  port: 8899
+  connection_type: tcp
+  timeout: 5.0
