@@ -7,6 +7,7 @@
         -> cl_ac / cl_pv / cl_meter / cl_inverter（CL 实例）
         -> ac_pbl / pv_pbl / meter_pbl / inverter_pbl（PBL 实例，function 级，
            每个用例持有独立 recorder）
+        -> ppl_schedule（PPL 公共流程调度器，function 级，组合所需 PBL）
 
 骨架版本说明：设备连接尚未实现，device_drivers 夹具会跳过所有依赖硬件的用例。
 TODO 实现顺序：
@@ -133,3 +134,17 @@ def inverter_pbl(cl_inverter, cl_pv, cl_ac, cl_meter, recorder, logger):
     #                          cl_ac=cl_ac, cl_meter=cl_meter,
     #                          recorder=recorder, logger=logger)
     pytest.skip("TODO: PBL 装配尚未实现（骨架版本）")
+
+
+# ---------------- PPL 夹具（function 级，组合所需 PBL） ----------------
+
+@pytest.fixture()
+def ppl_schedule(inverter_pbl, pv_pbl, ac_pbl, meter_pbl, recorder, logger):
+    """PPL 公共流程调度器（跨设备组合流程，如电网过欠压/过欠频保护、高低穿）"""
+    # TODO:
+    #   from Common.ppl.ppl_schedule import PplSchedule
+    #   return PplSchedule(pbl_inverter=inverter_pbl, pbl_pv=pv_pbl,
+    #                      pbl_ac=ac_pbl, pbl_meter=meter_pbl,
+    #                      recorder=recorder, logger=logger)
+    # 注意: scope（示波器驱动）待 driver/oscilloscope.py 实现后接入
+    pytest.skip("TODO: PPL 装配尚未实现（骨架版本）")

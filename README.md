@@ -7,7 +7,7 @@
 ## 目录结构
 
 ```
-pv-test-platform/
+auto-test-platform/
 ├── Compara.py                          # 顶层数据比较与报告生成入口
 ├── conftest.py                         # pytest 全局夹具
 ├── run_tests.py                        # 测试运行入口
@@ -23,10 +23,19 @@ pv-test-platform/
 ├── cl/                                 # 原子业务层（Common Layer）
 ├── pbl/                                # 复合业务层（Public Business Layer）
 ├── pml/                                # 数据记录层（Public Measure Layer）
+├── Common/                             # 公共流程层（Public Process Layer）
+│   └── ppl/
+│       └── ppl_schedule.py             # 跨设备组合的通用测试流程调度
 ├── testcase/                           # 测试用例目录
-│   ├── case/                           # 测试用例脚本
-│   ├── config/                         # 测试配置（用于平台展示）
-│   └── data/raw/                       # 原始数据文件
+│   ├── conftest.py                     # 用例夹具（连接→驱动→CL→PBL→PPL 装配）
+│   └── 逆变器/                         # 按测试场景分类
+│       ├── 效率测试/
+│       ├── 极限测试/                   # 反复高低穿、长期最大无功运行等
+│       ├── 系统测试/
+│       │   ├── 保护测试/               # 过欠压保护、过欠频保护
+│       │   ├── 功能测试/               # 用例脚本、测试配置、原始数据
+│       │   └── 性能测试/
+│       └── 认证测试/                   # CEI021、EN50549 等认证项
 ├── doc/                                # 文档输出目录（报告 / 模板）
 ├── scripts/                            # 工具脚本（Jenkins同步 / 急停 / 设备检查）
 ├── utils/                              # 工具类（日志 / 计时 / 重试 / 异常）
@@ -42,7 +51,8 @@ pv-test-platform/
 | `cl` | 原子操作 | 单步设备操作（设电压、开输出、读测量值），持有驱动实例插槽 |
 | `pbl` | 复合业务 | 测试序列编排（缓启动、电源循环、IV 扫描、MPPT、效率测试） |
 | `pml` | 数据记录 | 实时记录 → 统计分析 → 导出 Excel/CSV |
-| `testcase` | 测试用例 | pytest 用例脚本，通过夹具自动装配 PBL/CL 实例 |
+| `Common/ppl` | 公共流程 | 跨设备组合的通用流程调度（电网过欠压/过欠频保护、波形记录、保护时间、高低穿、最大无功运行） |
+| `testcase` | 测试用例 | pytest 用例脚本，按场景分类，通过夹具自动装配 PPL/PBL/CL 实例 |
 | `Compara.py` | 结果比对 | 实测数据 vs 期望数据，生成 HTML 报告 |
 
 ## 安装
@@ -68,7 +78,7 @@ TEST_ENV=Production_Line_3                             # 对应 env_config.yml �
 python run_tests.py
 
 # 运行单个用例文件
-python run_tests.py --case testcase/case/test_ac_soft_start.py
+python run_tests.py --case testcase/逆变器/系统测试/功能测试/test_ac_soft_start.py
 
 # 生成 HTML 报告
 python run_tests.py --report
@@ -77,7 +87,7 @@ python run_tests.py --report
 python run_tests.py --mock
 
 # 直接使用 pytest（标记说明见 pytest.ini）
-pytest testcase/case/test_ac_soft_start.py -m ac
+pytest testcase/逆变器/系统测试/功能测试/test_ac_soft_start.py -m ac
 ```
 
 ## 常用脚本
